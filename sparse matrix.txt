@@ -9,6 +9,7 @@ ADDI $20 , $0, 0 # Base address of the matrix
 ADDI $9 , $0, 0 # rowIndex
 outerLoop:
 SLT $11, $9, $16 # Check if rowIndex < Rows
+NOP
 BEQ $11, $0, exitOuter
 # Precompute row base offset: rowIndex * Cols
 ADDI $14, $0, 0 # Reset base offset accumulator
@@ -16,6 +17,7 @@ ADDI $15, $0, 0 # Initialize loop counter
 Multiply:
 # Multiply rowIndex * Cols by repeated addition
 SLT $11, $15, $9
+NOP
 BEQ $11, $0, endMultiply
 ADD $14, $14, $17 # Accumulate: base offset += Cols
 ADDI $15, $15, 1 # Increment loop counter
@@ -24,16 +26,21 @@ endMultiply:
 # Choose one of these Insertion based on your memory
 # For Word addressable 
 ADD $14, $14, $0 
+NOP
 ADD $14, $14, $20 # Base address for current row
 ADDI $10, $0, 0 # colIndex
 innerLoop:
 SLT $11, $10, $17 # Check if colIndex < Cols
+NOP
 BEQ $11, $0, exitInner
 # Choose one of these Insertion based on your memory
 # For Word addressable 
 ADD $15, $10, $0 
+NOP
 ADD $24, $14, $15 # Base row address + column offset
+NOP
 LW $24, matrix($24) # Load element: matrix[rowIndex][colIndex]
+NOP
 BNE $24, $0, notZero # Check if element != 0
 ADDI $8, $8, 1 # Increment zero counter if element == 0
 notZero:
