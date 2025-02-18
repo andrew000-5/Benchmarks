@@ -29,6 +29,7 @@ ADD $14, $14, $0
 NOP
 ADD $14, $14, $20 # Base address for current row
 ADDI $10, $0, 0 # colIndex
+NOP
 innerLoop:
 SLT $11, $10, $17 # Check if colIndex < Cols
 NOP
